@@ -19,7 +19,7 @@ namespace BankAccount
         }
         public override void Deposit(float money)
         {
-            Console.WriteLine("Depositing $" + money.ToString("0.00") + " into your savings account.");
+            Console.WriteLine("Depositing " + money.ToString("$0.00") + " into your savings account.");
             base.Deposit(money);
         }
         public override void Withdraw(float money)
@@ -30,7 +30,7 @@ namespace BankAccount
             }
             else
             {
-                Console.WriteLine("Withdrawing $" + money.ToString("0.00") + " from your savings account.");
+                Console.WriteLine("Withdrawing " + money.ToString("$0.00") + " from your savings account.");
                 base.Withdraw(money);
             }
         }

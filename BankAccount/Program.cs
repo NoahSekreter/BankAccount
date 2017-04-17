@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -11,8 +12,8 @@ namespace BankAccount
     {
         static void Main(string[] args)
         {
+            //Creating required variables
             Client client;
-            string name;
             int selected;
             string answer;
 
@@ -23,21 +24,16 @@ namespace BankAccount
             do
             {
                 Console.Write("Name: ");
-                name = Console.ReadLine();
-                if(name == "")
+                answer = Console.ReadLine();
+                if(answer == "")
                 {
                     Console.WriteLine("I'm sorry, but you must enter something in as a name.");
                 }
-                else if(name.ToLower() == "doot")
-                {
-                    //Ignore: When transfering over to another computer, this will not work
-                    //Doot();
-                }
-            } while (name == "");
+            } while (answer == "");
 
-            Console.WriteLine("Welcome " + name + ". We'll set up an account for you right away.");
+            client = new Client(answer);
+            Console.WriteLine("Welcome " + client.Name + ". We'll set up an account for you right away.");
             Console.WriteLine("Establishing a new savings and checking account.");
-            client = new Client(name);
 
             //This do while loop will keep on going until the user quits
             do
@@ -52,9 +48,17 @@ namespace BankAccount
                 Console.Write("\n> ");
 
                 //Parses whatever the user types in
-                if(!int.TryParse(Console.ReadLine(), out selected))
+                answer = Console.ReadLine();
+                if (!int.TryParse(answer, out selected) && answer.ToLower() == "doot")
                 {
-                    Console.WriteLine("I'm sorry, that is not an acceptable response.");
+                    //Secret easter egg!
+                    //If the program crashes if the user puts in "doot", then the Doot() method still doesn't work
+                    //You can only experience this feature if you have the sound on
+                    Doot();
+                }
+                else
+                {
+                    Console.WriteLine();
                 }
 
                 switch (selected)
@@ -172,15 +176,31 @@ namespace BankAccount
                         Console.WriteLine("Thank you for doing business with us.");
                         break;
                     default:
+                        if (answer.ToLower() != "doot")
+                        {
+                            Console.WriteLine("I'm sorry, that's not a valid response");
+                        }
                         break;
                 }
                 Console.WriteLine();
             } while (selected != 5);
         }
+
+        //This was a pain to set up, but I believe it works. Maybe?
+        //I intended for this to be able to reach the sound file even if the location of the program is different
         public static void Doot()
         {
             SoundPlayer simpleSound = new SoundPlayer();
-            simpleSound.SoundLocation = @"C:\Users\WeCanCodeIT\Documents\Visual Studio 2015\Projects\BankAccount\BankAccount\Properties\doot.wav";
+            
+            //getting root path of the .exe program
+            string rootLocation = typeof(Program).Assembly.Location;
+
+            //Cut the root location so it only goes so far to the second "BankAccount" file
+            rootLocation = rootLocation.Substring(0,rootLocation.LastIndexOf("BankAccount", rootLocation.LastIndexOf("BankAccount") - 1));
+
+            // Getting the full sound location
+            simpleSound.SoundLocation = Path.Combine(rootLocation, @"BankAccount\Properties\doot.wav");
+
             simpleSound.PlaySync();
         }
     }

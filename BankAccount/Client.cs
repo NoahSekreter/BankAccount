@@ -13,6 +13,10 @@ namespace BankAccount
         private string name;
         private Random r;
 
+        public string Name
+        {
+            get { return name; }
+        }
         public SavingsAccount Savings
         {
             get { return savings; }
@@ -44,7 +48,7 @@ namespace BankAccount
             }
             //Is it b?
             else if (str.ToLower() == "b")
-            {
+            { 
                 savings.AccountInfo();
             }
             //Not a valid answer

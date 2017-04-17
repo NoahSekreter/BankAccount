@@ -19,12 +19,12 @@ namespace BankAccount
         }
         public override void Deposit(float money)
         {
-            Console.WriteLine("Depositing $" + money.ToString("0.00") + " into your checking account.");
+            Console.WriteLine("Depositing " + money.ToString("$0.00") + " into your checking account.");
             base.Deposit(money);
         }
         public override void Withdraw(float money)
         {
-            Console.WriteLine("Withdrawing $" + money.ToString("0.00") + " from your checking account.");
+            Console.WriteLine("Withdrawing " + money.ToString("$0.00") + " from your checking account.");
             base.Withdraw(money);
         }
     }

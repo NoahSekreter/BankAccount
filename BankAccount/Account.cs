@@ -28,19 +28,19 @@ namespace BankAccount
 
         public virtual void AccountInfo()
         {
-            Console.WriteLine("Current Balance: $" + balance.ToString("0.00"));
+            Console.WriteLine("Current Balance: " + balance.ToString("$0.00"));
             Console.WriteLine("Account Number: " + number.ToString("0000"));
         }
 
         public virtual void Deposit(float money)
         {
             balance += money;
-            Console.WriteLine("Your current balance is now $" + balance.ToString("0.00"));
+            Console.WriteLine("Your current balance is now " + balance.ToString("$0.00"));
         }
         public virtual void Withdraw(float money)
         {
             balance -= money;
-            Console.WriteLine("Your current balance is now $" + balance.ToString("0.00"));
+            Console.WriteLine("Your current balance is now " + balance.ToString("$0.00"));
         }
     }
 }
